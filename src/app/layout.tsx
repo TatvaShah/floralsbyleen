@@ -18,17 +18,37 @@ const fontClass = {
   event: `${instrument.variable} ${outfit.variable}`,
 }[brand.variant];
 
+const siteUrl = "https://floralsbyleen.vercel.app";
+const shareTitle = `${brand.name} | ${brand.location}`;
+const shareImage = {
+  url: "/og.png",
+  width: 1200,
+  height: 630,
+  alt: `${brand.name} in ${brand.location}`,
+  type: "image/png",
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: `${brand.name} | ${brand.location}`,
+    default: shareTitle,
     template: `%s | ${brand.name}`,
   },
   description: brand.subhead,
   openGraph: {
-    title: `${brand.name} | ${brand.location}`,
+    title: shareTitle,
     description: brand.subhead,
+    url: siteUrl,
+    siteName: brand.name,
     locale: brand.country === "US" ? "en_US" : "en_CA",
     type: "website",
+    images: [shareImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: shareTitle,
+    description: brand.subhead,
+    images: [shareImage],
   },
 };
 
